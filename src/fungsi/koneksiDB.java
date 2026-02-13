@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.util.Properties;
 import javax.swing.JOptionPane;
+import AESsecurity.EnkripsiAES;
 
 /**
  *
@@ -29,93 +30,48 @@ public final class koneksiDB {
         if (connection == null) {
             try {
                 prop.loadFromXML(new FileInputStream("setting/database.xml"));
-                host = Sequel.decXML2(prop.getProperty("HOST"), prop.getProperty("KEY"));
-                database = Sequel.decXML2(prop.getProperty("DATABASE"), prop.getProperty("KEY"));
-                port = Sequel.decXML2(prop.getProperty("PORT"), prop.getProperty("KEY"));
-                user = Sequel.decXML2(prop.getProperty("USER"), prop.getProperty("KEY"));
-                pas = Sequel.decXML2(prop.getProperty("PAS"), prop.getProperty("KEY"));
-                //dataSource.setURL("jdbc:mysql://"+prop.getProperty("HOST")+":"+prop.getProperty("PORT")+"/"+prop.getProperty("DATABASE")+"?zeroDateTimeBehavior=convertToNull");
-                dataSource.setURL("jdbc:mysql://" + host + ":" + port + "/" + database + "?zeroDateTimeBehavior=convertToNull");
-                dataSource.setUser(user);
-                dataSource.setPassword(pas);
-                connection = dataSource.getConnection();
+                dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useCompression=true");                
+                dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
+                dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
+                connection=dataSource.getConnection();
                 System.out.println("Koneksi Berhasil. Sedang verifikasi data, silakan tunggu sebentar.... \n\n"
-                        + "    _____  _    _     _____           _          _                   ____   ____    \n"
-                        + "   |_   _|| |  | |   /  _  \\ _ ___  _| |_  _ __ |_|  __ _  _ ___    |  _ \\ |_   |    \n"
-                        + "     | |  | |  | |   | (_) || `_  ||_   _|| `__|| | / _` || `_  |   | |_) |  / /       \n"
-                        + "     | |   \\ \\/ /    |  _  || | | |  | |_ | |   | || (_| || | | |   |  _ <  / /_     \n"
-                        + "     |_|    \\__/     |_| |_||_| |_|  |___||_|   |_| \\__,_||_| |_|   |_| \\_\\|____|   \n"                        
+                        + "    _____  _    _     _____           _          _                   \n"
+                        + "   |_   _|| |  | |   /  _  \\ _ ___  _| |_  _ __ |_|  __ _  _ ___    \n"
+                        + "     | |  | |  | |   | (_) || `_  ||_   _|| `__|| | / _` || `_  |          \n"
+                        + "     | |   \\ \\/ /    |  _  || | | |  | |_ | |   | || (_| || | | |       \n"
+                        + "     |_|    \\__/     |_| |_||_| |_|  |___||_|   |_| \\__,_||_| |_|     \n"                        
                         + "                                                                            \n\n"
-                        + "    POWERED BY. UNIT SIMRS RSUD Ratu Zalecha                                   \n"
+                        + "    POWERED BY. RSU Nirwana                                   \n"
                         + "                                                                           ");
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Koneksi Putus : " + e);
+                try {
+                    if(connection.isClosed()){
+                        prop.loadFromXML(new FileInputStream("setting/database.xml"));
+                        dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;cachePrepStmts=true");
+                        dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
+                        dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
+                        connection=dataSource.getConnection();  
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,"Koneksi Putus : "+e);
+                }
             }
         }
         return connection;
     }
     
     public static String cariCepat() {
-        try {
+        try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            caricepat = prop.getProperty("CARICEPAT");
-        } catch (Exception e) {
-            caricepat = "tidak aktif";
-        }
-        return caricepat;
-    }
-    
-    public static String HOST() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var = Sequel.decXML2(prop.getProperty("HOST"), prop.getProperty("KEY"));
-        } catch (Exception e) {
-            var = "";
+            var=prop.getProperty("CARICEPAT");
+        }catch(Exception e){
+            var=""; 
         }
         return var;
     }
     
-    public static String DATABASE() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var = Sequel.decXML2(prop.getProperty("DATABASE"), prop.getProperty("KEY"));
-        } catch (Exception e) {
-            var = "";
-        }
-        return var;
-    }
-
-    public static String PORT() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var = Sequel.decXML2(prop.getProperty("PORT"), prop.getProperty("KEY"));
-        } catch (Exception e) {
-            var = "";
-        }
-        return var;
-    }
-    
-    public static String USER() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var = Sequel.decXML2(prop.getProperty("USER"), prop.getProperty("KEY"));
-        } catch (Exception e) {
-            var = "";
-        }
-        return var;
-    }
-    
-    public static String PASSWORD() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var = Sequel.decXML2(prop.getProperty("PAS"), prop.getProperty("KEY"));
-        } catch (Exception e) {
-            var = "";
-        }
-        return var;
-    }
-
     public static String AKTIFKANTRACKSQL() {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));

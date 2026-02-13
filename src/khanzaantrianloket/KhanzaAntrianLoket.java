@@ -20,7 +20,7 @@ public class KhanzaAntrianLoket {
     public static void main(String[] args) {
         frmUtama antrian = new frmUtama(null, false);
         antrian.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        antrian.cekHariLibur();
+//        antrian.cekHariLibur();
         antrian.setVisible(true);
     }
 }

@@ -143,21 +143,11 @@ public class frmUtama extends javax.swing.JFrame {
         internalFrame6 = new widget.InternalFrame();
         internalFrame7 = new widget.InternalFrame();
         internalFrame9 = new widget.InternalFrame();
+        internalFrame20 = new widget.InternalFrame();
         internalFrame14 = new widget.InternalFrame();
-        no_bpjs = new javax.swing.JLabel();
+        no_antri = new javax.swing.JLabel();
         internalFrame15 = new widget.InternalFrame();
-        loket_bpjs = new javax.swing.JLabel();
-        internalFrame10 = new widget.InternalFrame();
-        internalFrame16 = new widget.InternalFrame();
-        no_khusus = new javax.swing.JLabel();
-        internalFrame17 = new widget.InternalFrame();
-        loket_khusus = new javax.swing.JLabel();
-        internalFrame11 = new widget.InternalFrame();
-        internalFrame12 = new widget.InternalFrame();
-        internalFrame18 = new widget.InternalFrame();
-        no_umum = new javax.swing.JLabel();
-        internalFrame19 = new widget.InternalFrame();
-        loket_umum = new javax.swing.JLabel();
+        no_loket = new javax.swing.JLabel();
         internalFrame13 = new widget.InternalFrame();
         tgljam = new javax.swing.JLabel();
         internalFrame8 = new widget.InternalFrame();
@@ -222,11 +212,11 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
         });
 
@@ -269,135 +259,59 @@ public class frmUtama extends javax.swing.JFrame {
 
         internalFrame7.setBorder(null);
         internalFrame7.setName("internalFrame7"); // NOI18N
-        internalFrame7.setPreferredSize(new java.awt.Dimension(480, 1200));
+        internalFrame7.setPreferredSize(new java.awt.Dimension(400, 1200));
         internalFrame7.setLayout(new java.awt.BorderLayout(1, 1));
 
-        internalFrame9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, " BPJS KESEHATAN ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 30), new java.awt.Color(0, 153, 0))); // NOI18N
+        internalFrame9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, " TPPRJ ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 30), new java.awt.Color(0, 153, 0))); // NOI18N
         internalFrame9.setName("internalFrame9"); // NOI18N
         internalFrame9.setPreferredSize(new java.awt.Dimension(300, 250));
         internalFrame9.setWarnaBawah(new java.awt.Color(127, 220, 34));
         internalFrame9.setLayout(new java.awt.BorderLayout(1, 1));
 
-        internalFrame14.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), " NO. ANTRIAN ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(0, 153, 0))); // NOI18N
+        internalFrame20.setName("internalFrame20"); // NOI18N
+        internalFrame20.setPreferredSize(new java.awt.Dimension(300, 250));
+        internalFrame20.setWarnaBawah(new java.awt.Color(127, 220, 34));
+        internalFrame20.setLayout(new java.awt.GridLayout(2, 1));
+
+        internalFrame14.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), " NO. ANTRIAN ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 45), new java.awt.Color(0, 153, 0))); // NOI18N
         internalFrame14.setName("internalFrame14"); // NOI18N
         internalFrame14.setPreferredSize(new java.awt.Dimension(300, 250));
         internalFrame14.setWarnaBawah(new java.awt.Color(127, 220, 34));
         internalFrame14.setLayout(new java.awt.BorderLayout(1, 1));
 
-        no_bpjs.setFont(new java.awt.Font("Tahoma", 1, 170)); // NOI18N
-        no_bpjs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        no_bpjs.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        no_bpjs.setName("no_bpjs"); // NOI18N
-        no_bpjs.setPreferredSize(new java.awt.Dimension(100, 23));
-        internalFrame14.add(no_bpjs, java.awt.BorderLayout.CENTER);
+        no_antri.setFont(new java.awt.Font("Tahoma", 1, 190)); // NOI18N
+        no_antri.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        no_antri.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        no_antri.setName("no_antri"); // NOI18N
+        no_antri.setPreferredSize(new java.awt.Dimension(100, 23));
+        internalFrame14.add(no_antri, java.awt.BorderLayout.CENTER);
 
-        internalFrame9.add(internalFrame14, java.awt.BorderLayout.CENTER);
+        internalFrame20.add(internalFrame14);
 
-        internalFrame15.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), " DI LOKET ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(0, 153, 0))); // NOI18N
+        internalFrame15.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), " DI LOKET ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 50), new java.awt.Color(0, 153, 0))); // NOI18N
         internalFrame15.setName("internalFrame15"); // NOI18N
         internalFrame15.setPreferredSize(new java.awt.Dimension(120, 250));
         internalFrame15.setWarnaBawah(new java.awt.Color(127, 220, 34));
         internalFrame15.setLayout(new java.awt.BorderLayout(1, 1));
 
-        loket_bpjs.setFont(new java.awt.Font("Tahoma", 1, 160)); // NOI18N
-        loket_bpjs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loket_bpjs.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        loket_bpjs.setName("loket_bpjs"); // NOI18N
-        loket_bpjs.setPreferredSize(new java.awt.Dimension(100, 23));
-        internalFrame15.add(loket_bpjs, java.awt.BorderLayout.CENTER);
+        no_loket.setFont(new java.awt.Font("Tahoma", 1, 250)); // NOI18N
+        no_loket.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        no_loket.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        no_loket.setName("no_loket"); // NOI18N
+        no_loket.setPreferredSize(new java.awt.Dimension(100, 23));
+        internalFrame15.add(no_loket, java.awt.BorderLayout.CENTER);
 
-        internalFrame9.add(internalFrame15, java.awt.BorderLayout.LINE_END);
+        internalFrame20.add(internalFrame15);
 
-        internalFrame7.add(internalFrame9, java.awt.BorderLayout.PAGE_START);
-
-        internalFrame10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, " KHUSUS / PRIORITAS ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 30), new java.awt.Color(153, 0, 153))); // NOI18N
-        internalFrame10.setName("internalFrame10"); // NOI18N
-        internalFrame10.setPreferredSize(new java.awt.Dimension(300, 300));
-        internalFrame10.setWarnaBawah(new java.awt.Color(235, 117, 235));
-        internalFrame10.setLayout(new java.awt.BorderLayout(1, 1));
-
-        internalFrame16.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), " NO. ANTRIAN ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(153, 0, 153))); // NOI18N
-        internalFrame16.setName("internalFrame16"); // NOI18N
-        internalFrame16.setPreferredSize(new java.awt.Dimension(300, 300));
-        internalFrame16.setWarnaBawah(new java.awt.Color(235, 117, 235));
-        internalFrame16.setLayout(new java.awt.BorderLayout(1, 1));
-
-        no_khusus.setFont(new java.awt.Font("Tahoma", 1, 170)); // NOI18N
-        no_khusus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        no_khusus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        no_khusus.setName("no_khusus"); // NOI18N
-        no_khusus.setPreferredSize(new java.awt.Dimension(100, 23));
-        internalFrame16.add(no_khusus, java.awt.BorderLayout.CENTER);
-
-        internalFrame10.add(internalFrame16, java.awt.BorderLayout.CENTER);
-
-        internalFrame17.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), " DI LOKET ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(153, 0, 153))); // NOI18N
-        internalFrame17.setName("internalFrame17"); // NOI18N
-        internalFrame17.setPreferredSize(new java.awt.Dimension(120, 300));
-        internalFrame17.setWarnaBawah(new java.awt.Color(235, 117, 235));
-        internalFrame17.setLayout(new java.awt.BorderLayout(1, 1));
-
-        loket_khusus.setFont(new java.awt.Font("Tahoma", 1, 160)); // NOI18N
-        loket_khusus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loket_khusus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        loket_khusus.setName("loket_khusus"); // NOI18N
-        loket_khusus.setPreferredSize(new java.awt.Dimension(100, 23));
-        internalFrame17.add(loket_khusus, java.awt.BorderLayout.CENTER);
-
-        internalFrame10.add(internalFrame17, java.awt.BorderLayout.LINE_END);
-
-        internalFrame7.add(internalFrame10, java.awt.BorderLayout.CENTER);
-
-        internalFrame11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, " UMUM (NON BPJS) ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 30))); // NOI18N
-        internalFrame11.setName("internalFrame11"); // NOI18N
-        internalFrame11.setPreferredSize(new java.awt.Dimension(300, 308));
-        internalFrame11.setLayout(new java.awt.BorderLayout(1, 1));
-
-        internalFrame12.setBorder(null);
-        internalFrame12.setName("internalFrame12"); // NOI18N
-        internalFrame12.setPreferredSize(new java.awt.Dimension(300, 300));
-        internalFrame12.setWarnaBawah(new java.awt.Color(204, 204, 204));
-        internalFrame12.setLayout(new java.awt.BorderLayout(1, 1));
-
-        internalFrame18.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), " NO. ANTRIAN ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
-        internalFrame18.setName("internalFrame18"); // NOI18N
-        internalFrame18.setPreferredSize(new java.awt.Dimension(300, 300));
-        internalFrame18.setWarnaBawah(new java.awt.Color(204, 204, 204));
-        internalFrame18.setLayout(new java.awt.BorderLayout(1, 1));
-
-        no_umum.setFont(new java.awt.Font("Tahoma", 1, 90)); // NOI18N
-        no_umum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        no_umum.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        no_umum.setName("no_umum"); // NOI18N
-        no_umum.setPreferredSize(new java.awt.Dimension(100, 23));
-        internalFrame18.add(no_umum, java.awt.BorderLayout.CENTER);
-
-        internalFrame12.add(internalFrame18, java.awt.BorderLayout.CENTER);
-
-        internalFrame19.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), " DI LOKET ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
-        internalFrame19.setName("internalFrame19"); // NOI18N
-        internalFrame19.setPreferredSize(new java.awt.Dimension(120, 300));
-        internalFrame19.setWarnaBawah(new java.awt.Color(204, 204, 204));
-        internalFrame19.setLayout(new java.awt.BorderLayout(1, 1));
-
-        loket_umum.setFont(new java.awt.Font("Tahoma", 1, 160)); // NOI18N
-        loket_umum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loket_umum.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        loket_umum.setName("loket_umum"); // NOI18N
-        loket_umum.setPreferredSize(new java.awt.Dimension(100, 23));
-        internalFrame19.add(loket_umum, java.awt.BorderLayout.CENTER);
-
-        internalFrame12.add(internalFrame19, java.awt.BorderLayout.LINE_END);
-
-        internalFrame11.add(internalFrame12, java.awt.BorderLayout.CENTER);
+        internalFrame9.add(internalFrame20, java.awt.BorderLayout.CENTER);
 
         internalFrame13.setBorder(null);
         internalFrame13.setName("internalFrame13"); // NOI18N
         internalFrame13.setPreferredSize(new java.awt.Dimension(300, 50));
-        internalFrame13.setWarnaAtas(new java.awt.Color(204, 204, 204));
+        internalFrame13.setWarnaAtas(new java.awt.Color(127, 220, 34));
         internalFrame13.setLayout(new java.awt.BorderLayout(1, 1));
 
-        tgljam.setFont(new java.awt.Font("Tahoma", 1, 37)); // NOI18N
+        tgljam.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         tgljam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tgljam.setText("Tanggal & Jam");
         tgljam.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -405,9 +319,9 @@ public class frmUtama extends javax.swing.JFrame {
         tgljam.setPreferredSize(new java.awt.Dimension(100, 23));
         internalFrame13.add(tgljam, java.awt.BorderLayout.CENTER);
 
-        internalFrame11.add(internalFrame13, java.awt.BorderLayout.PAGE_END);
+        internalFrame9.add(internalFrame13, java.awt.BorderLayout.PAGE_END);
 
-        internalFrame7.add(internalFrame11, java.awt.BorderLayout.PAGE_END);
+        internalFrame7.add(internalFrame9, java.awt.BorderLayout.CENTER);
 
         internalFrame4.add(internalFrame7, java.awt.BorderLayout.LINE_END);
 
@@ -416,7 +330,7 @@ public class frmUtama extends javax.swing.JFrame {
         internalFrame8.setBorder(null);
         internalFrame8.setName("internalFrame8"); // NOI18N
         internalFrame8.setPreferredSize(new java.awt.Dimension(0, 120));
-        internalFrame8.setWarnaBawah(new java.awt.Color(156, 200, 20));
+        internalFrame8.setWarnaBawah(new java.awt.Color(127, 220, 34));
         internalFrame8.setLayout(new java.awt.BorderLayout(1, 1));
 
         kalimat_info.setFont(new java.awt.Font("Tahoma", 1, 93)); // NOI18N
@@ -484,17 +398,11 @@ public class frmUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem MnRefresKalimat;
     private javax.swing.JMenuItem MnTutupAplikasi;
     private usu.widget.glass.PanelGlass PanelWall;
-    private widget.InternalFrame internalFrame10;
-    private widget.InternalFrame internalFrame11;
-    private widget.InternalFrame internalFrame12;
     private widget.InternalFrame internalFrame13;
     private widget.InternalFrame internalFrame14;
     private widget.InternalFrame internalFrame15;
-    private widget.InternalFrame internalFrame16;
-    private widget.InternalFrame internalFrame17;
-    private widget.InternalFrame internalFrame18;
-    private widget.InternalFrame internalFrame19;
     private widget.InternalFrame internalFrame2;
+    private widget.InternalFrame internalFrame20;
     private widget.InternalFrame internalFrame4;
     private widget.InternalFrame internalFrame6;
     private widget.InternalFrame internalFrame7;
@@ -503,12 +411,8 @@ public class frmUtama extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JLabel judul;
     private javax.swing.JLabel kalimat_info;
-    private javax.swing.JLabel loket_bpjs;
-    private javax.swing.JLabel loket_khusus;
-    private javax.swing.JLabel loket_umum;
-    private javax.swing.JLabel no_bpjs;
-    private javax.swing.JLabel no_khusus;
-    private javax.swing.JLabel no_umum;
+    private javax.swing.JLabel no_antri;
+    private javax.swing.JLabel no_loket;
     private javax.swing.JLabel tgljam;
     // End of variables declaration//GEN-END:variables
 
@@ -585,24 +489,14 @@ public class frmUtama extends javax.swing.JFrame {
                 String menit = nol_menit + Integer.toString(nilai_menit);
                 String detik = nol_detik + Integer.toString(nilai_detik);
                 jamPasnya = jam + ":" + menit + ":" + detik;                
-                komputerDimatikan();
+//                komputerDimatikan();
                 
                 // Menampilkan pada Layar
                 tgljam.setText(Sequel.cariIsi("SELECT date_format(now(),'%d-%m-%Y')") + " || " + jam + ":" + menit + ":" + detik);
                 
-                no_bpjs.setText(Sequel.cariIsi("SELECT no_antrian FROM antrian_pemanggil_bpjs where "
+                no_antri.setText(Sequel.cariIsi("SELECT no_antrian FROM antrian_pemanggil where "
                         + "date(waktu_panggil)=date(now()) ORDER BY no_antrian DESC LIMIT 1"));
-                loket_bpjs.setText(Sequel.cariIsi("SELECT diloket FROM antrian_pemanggil_bpjs where "
-                        + "date(waktu_panggil)=date(now()) ORDER BY no_antrian DESC LIMIT 1"));
-
-                no_khusus.setText(Sequel.cariIsi("SELECT no_antrian FROM antrian_pemanggil_lansia where "
-                        + "date(waktu_panggil)=date(now()) ORDER BY no_antrian DESC LIMIT 1"));
-                loket_khusus.setText(Sequel.cariIsi("SELECT diloket FROM antrian_pemanggil_lansia where "
-                        + "date(waktu_panggil)=date(now()) ORDER BY no_antrian DESC LIMIT 1"));
-
-                no_umum.setText(Sequel.cariIsi("SELECT concat('PU-',no_antrian) FROM antrian_pemanggil_umum where "
-                        + "date(waktu_panggil)=date(now()) ORDER BY no_antrian DESC LIMIT 1"));
-                loket_umum.setText(Sequel.cariIsi("SELECT diloket FROM antrian_pemanggil_umum where "
+                no_loket.setText(Sequel.cariIsi("SELECT diloket FROM antrian_pemanggil where "
                         + "date(waktu_panggil)=date(now()) ORDER BY no_antrian DESC LIMIT 1"));
             }
         };
