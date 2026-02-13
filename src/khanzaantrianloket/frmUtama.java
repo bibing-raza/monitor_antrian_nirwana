@@ -45,6 +45,7 @@ import javafx.concurrent.Worker;
 import static javafx.concurrent.Worker.State.FAILED;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.web.PopupFeatures;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebEvent;
@@ -63,6 +64,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import static mondrian.olap.fun.vba.Vba.date;
 import org.apache.poi.hssf.record.PageBreakRecord;
+import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
+import uk.co.caprica.vlcj.discovery.NativeDiscovery;
 
 /**
  *
@@ -80,13 +83,13 @@ public class frmUtama extends javax.swing.JFrame {
     private String now = dateformat2.format(date);
     private String urlNya = "", jamShutdown = "", jamPasnya = "", tglReset = "";
     private int i = 0;
-    private WebEngine engine;
     private final JPanel panel = new JPanel(new BorderLayout());
     private final JFXPanel jfxPanel = new JFXPanel();    
     
     public frmUtama(java.awt.Frame parent, boolean modal) {
 //        super(parent, modal);
         initComponents(); 
+        initVideo();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/LaST (Cobalt) My Network.png")).getImage());
         jam();
         
@@ -102,15 +105,6 @@ public class frmUtama extends javax.swing.JFrame {
         });
         timer.start();
         //sampai disini
-
-        //menampilkan video youtube
-        urlNya = Sequel.cariIsi("select url_video_player from antrian_informasi where kode='1'");
-        try {
-            loadURL(urlNya);
-            initComponents2();
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
-        }
 
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
@@ -142,7 +136,6 @@ public class frmUtama extends javax.swing.JFrame {
         internalFrame4 = new widget.InternalFrame();
         internalFrame6 = new widget.InternalFrame();
         internalFrame7 = new widget.InternalFrame();
-        internalFrame9 = new widget.InternalFrame();
         internalFrame20 = new widget.InternalFrame();
         internalFrame14 = new widget.InternalFrame();
         no_antri = new javax.swing.JLabel();
@@ -262,12 +255,6 @@ public class frmUtama extends javax.swing.JFrame {
         internalFrame7.setPreferredSize(new java.awt.Dimension(400, 1200));
         internalFrame7.setLayout(new java.awt.BorderLayout(1, 1));
 
-        internalFrame9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, " TPPRJ ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 30), new java.awt.Color(0, 153, 0))); // NOI18N
-        internalFrame9.setName("internalFrame9"); // NOI18N
-        internalFrame9.setPreferredSize(new java.awt.Dimension(300, 250));
-        internalFrame9.setWarnaBawah(new java.awt.Color(127, 220, 34));
-        internalFrame9.setLayout(new java.awt.BorderLayout(1, 1));
-
         internalFrame20.setName("internalFrame20"); // NOI18N
         internalFrame20.setPreferredSize(new java.awt.Dimension(300, 250));
         internalFrame20.setWarnaBawah(new java.awt.Color(127, 220, 34));
@@ -303,7 +290,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         internalFrame20.add(internalFrame15);
 
-        internalFrame9.add(internalFrame20, java.awt.BorderLayout.CENTER);
+        internalFrame7.add(internalFrame20, java.awt.BorderLayout.CENTER);
 
         internalFrame13.setBorder(null);
         internalFrame13.setName("internalFrame13"); // NOI18N
@@ -319,9 +306,7 @@ public class frmUtama extends javax.swing.JFrame {
         tgljam.setPreferredSize(new java.awt.Dimension(100, 23));
         internalFrame13.add(tgljam, java.awt.BorderLayout.CENTER);
 
-        internalFrame9.add(internalFrame13, java.awt.BorderLayout.PAGE_END);
-
-        internalFrame7.add(internalFrame9, java.awt.BorderLayout.CENTER);
+        internalFrame7.add(internalFrame13, java.awt.BorderLayout.PAGE_END);
 
         internalFrame4.add(internalFrame7, java.awt.BorderLayout.LINE_END);
 
@@ -407,7 +392,6 @@ public class frmUtama extends javax.swing.JFrame {
     private widget.InternalFrame internalFrame6;
     private widget.InternalFrame internalFrame7;
     private widget.InternalFrame internalFrame8;
-    private widget.InternalFrame internalFrame9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JLabel judul;
     private javax.swing.JLabel kalimat_info;
@@ -504,85 +488,6 @@ public class frmUtama extends javax.swing.JFrame {
         new Timer(1000, taskPerformer).start();
     }
     
-    private void createScene() {   
-        urlNya = "";
-        urlNya = Sequel.cariIsi("select url_video_player from antrian_informasi where kode='1'");
-        Platform.runLater(new Runnable() {
-
-            public void run() {
-                WebView view = new WebView();
-                
-                engine = view.getEngine();
-                engine.setJavaScriptEnabled(true);
-                
-                engine.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
-                    @Override
-                    public WebEngine call(PopupFeatures p) {
-                        Stage stage = new Stage(StageStyle.TRANSPARENT);
-                        return view.getEngine();
-                    }
-                });
-                
-                engine.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
-                    if (engine.getLoadWorker().getState() == FAILED) {
-                        SwingUtilities.invokeLater(() -> {
-                            JOptionPane.showMessageDialog(
-                                    panel,
-                                    (value != null) ?
-                                            engine.getLocation() + "\n" + value.getMessage() :
-                                            engine.getLocation() + "\nUnexpected Video.",
-                                    "Loading Video...",
-                                    JOptionPane.ERROR_MESSAGE);
-                        });
-                    }
-                });                
-                
-                engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
-                    @Override
-                    public void changed(ObservableValue ov, Worker.State oldState, Worker.State newState) {
-                        if (newState == Worker.State.SUCCEEDED) {
-                            try {
-                                if (engine.getLocation().replaceAll(urlNya, "").contains(urlNya)) {
-                                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                    Valid.panggilUrl(engine.getLocation().replaceAll(urlNya, ""));
-                                    engine.executeScript("history.back()");
-                                    setCursor(Cursor.getDefaultCursor());
-                                } else if (engine.getLocation().replaceAll(urlNya, "").contains(urlNya)) {
-                                    dispose();                                    
-                                }
-                            } catch (Exception ex) {
-                                System.out.println("Notifikasi : "+ex);
-                            }
-                        } 
-                    }
-                });
-                
-                jfxPanel.setScene(new Scene(view));
-            }
-        });
-    }
-   
-    public void loadURL(String url) {
-        try {            
-            createScene();
-        } catch (Exception e) {
-        }
-
-        Platform.runLater(() -> {
-            try {
-                engine.load(url);
-            } catch (Exception exception) {
-                engine.load(url);
-            }
-        });
-    }
-    
-    private void initComponents2() {           
-        panel.add(jfxPanel, BorderLayout.CENTER);        
-        internalFrame6.setLayout(new BorderLayout());
-        internalFrame6.add(panel);
-    }
-    
     private void resetPanggilanAntrian() {
         //panggilan bpjs
         if (Sequel.cariInteger("select count(-1) from antrian_pemanggil_bpjs where date(waktu_panggil)=date('" + tglReset + "')") > 0) {
@@ -664,5 +569,38 @@ public class frmUtama extends javax.swing.JFrame {
             } catch (Exception e) {
             }
         }
+    }
+
+    public void initVideo() {
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            System.setProperty("jna.library.path", "C:\\Program Files\\VideoLAN\\VLC");
+        } else {
+            System.setProperty("jna.library.path", "/usr/lib/x86_64-linux-gnu");
+        }
+
+        new NativeDiscovery().discover();
+
+        final EmbeddedMediaPlayerComponent mediaPlayerComponent
+                = new EmbeddedMediaPlayerComponent();
+
+        internalFrame6.setLayout(new BorderLayout());
+        internalFrame6.add(mediaPlayerComponent, BorderLayout.CENTER);
+        internalFrame6.setVisible(true);
+
+        final String mediaPath = Sequel.cariIsi("select lokasi_file_video from antrian_informasi where kode='1'");
+
+        //Play pertama kali
+        mediaPlayerComponent.getMediaPlayer().playMedia(mediaPath);
+
+        //Loop manual saat selesai
+        mediaPlayerComponent.getMediaPlayer().addMediaPlayerEventListener(
+                new uk.co.caprica.vlcj.player.MediaPlayerEventAdapter() {
+            @Override
+            public void finished(uk.co.caprica.vlcj.player.MediaPlayer mediaPlayer) {
+                mediaPlayer.playMedia(mediaPath);
+            }
+        }
+        );
     }
 }
