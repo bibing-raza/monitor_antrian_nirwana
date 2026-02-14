@@ -35,6 +35,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -84,12 +85,12 @@ public class frmUtama extends javax.swing.JFrame {
     private String urlNya = "", jamShutdown = "", jamPasnya = "", tglReset = "";
     private int i = 0;
     private final JPanel panel = new JPanel(new BorderLayout());
-    private final JFXPanel jfxPanel = new JFXPanel();    
+    private final JFXPanel jfxPanel = new JFXPanel();
+    private EmbeddedMediaPlayerComponent mediaPlayerComponent;
     
     public frmUtama(java.awt.Frame parent, boolean modal) {
 //        super(parent, modal);
-        initComponents(); 
-        initVideo();
+        initComponents();        
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/LaST (Cobalt) My Network.png")).getImage());
         jam();
         
@@ -130,6 +131,16 @@ public class frmUtama extends javax.swing.JFrame {
         MnTutupAplikasi = new javax.swing.JMenuItem();
         MnRefresKalimat = new javax.swing.JMenuItem();
         MnBrowserEdge = new javax.swing.JMenuItem();
+        MnPengaturan = new javax.swing.JMenuItem();
+        WindowPengaturan = new javax.swing.JDialog();
+        internalFrame5 = new widget.InternalFrame();
+        BtnClose = new widget.Button();
+        jLabel38 = new widget.Label();
+        TlokasiFile = new widget.TextBox();
+        BtnSimpan = new widget.Button();
+        jLabel39 = new widget.Label();
+        Scroll3 = new widget.ScrollPane();
+        Tkalimat = new widget.TextArea();
         internalFrame2 = new widget.InternalFrame();
         PanelWall = new usu.widget.glass.PanelGlass();
         judul = new javax.swing.JLabel();
@@ -194,6 +205,96 @@ public class frmUtama extends javax.swing.JFrame {
         });
         jPopupMenu1.add(MnBrowserEdge);
 
+        MnPengaturan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPengaturan.setText("Set Pengaturan");
+        MnPengaturan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPengaturan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPengaturan.setIconTextGap(5);
+        MnPengaturan.setName("MnPengaturan"); // NOI18N
+        MnPengaturan.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnPengaturan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPengaturanActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnPengaturan);
+
+        WindowPengaturan.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        WindowPengaturan.setName("WindowPengaturan"); // NOI18N
+        WindowPengaturan.setUndecorated(true);
+        WindowPengaturan.setResizable(false);
+
+        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 255), 3), "::[ Set Pengaturan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        internalFrame5.setName("internalFrame5"); // NOI18N
+        internalFrame5.setWarnaBawah(new java.awt.Color(245, 250, 240));
+        internalFrame5.setLayout(null);
+
+        BtnClose.setForeground(new java.awt.Color(0, 0, 0));
+        BtnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnClose.setMnemonic('U');
+        BtnClose.setText("Tutup");
+        BtnClose.setToolTipText("Alt+U");
+        BtnClose.setName("BtnClose"); // NOI18N
+        BtnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCloseActionPerformed(evt);
+            }
+        });
+        internalFrame5.add(BtnClose);
+        BtnClose.setBounds(620, 170, 100, 30);
+
+        jLabel38.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel38.setText("Path/Lokasi File :");
+        jLabel38.setName("jLabel38"); // NOI18N
+        internalFrame5.add(jLabel38);
+        jLabel38.setBounds(0, 135, 120, 23);
+
+        TlokasiFile.setBackground(new java.awt.Color(245, 250, 240));
+        TlokasiFile.setForeground(new java.awt.Color(0, 0, 0));
+        TlokasiFile.setName("TlokasiFile"); // NOI18N
+        internalFrame5.add(TlokasiFile);
+        TlokasiFile.setBounds(125, 135, 600, 23);
+
+        BtnSimpan.setForeground(new java.awt.Color(0, 0, 0));
+        BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpan.setMnemonic('S');
+        BtnSimpan.setText("Simpan");
+        BtnSimpan.setToolTipText("Alt+S");
+        BtnSimpan.setName("BtnSimpan"); // NOI18N
+        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSimpanActionPerformed(evt);
+            }
+        });
+        internalFrame5.add(BtnSimpan);
+        BtnSimpan.setBounds(510, 170, 100, 30);
+
+        jLabel39.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel39.setText("Kalimat Run Text :");
+        jLabel39.setName("jLabel39"); // NOI18N
+        internalFrame5.add(jLabel39);
+        jLabel39.setBounds(0, 20, 120, 23);
+
+        Scroll3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        Scroll3.setName("Scroll3"); // NOI18N
+
+        Tkalimat.setColumns(20);
+        Tkalimat.setRows(5);
+        Tkalimat.setName("Tkalimat"); // NOI18N
+        Tkalimat.setPreferredSize(new java.awt.Dimension(170, 2000));
+        Tkalimat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TkalimatKeyPressed(evt);
+            }
+        });
+        Scroll3.setViewportView(Tkalimat);
+
+        internalFrame5.add(Scroll3);
+        Scroll3.setBounds(125, 20, 600, 110);
+
+        WindowPengaturan.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("::[ Monitor Antrian ]::");
         setIconImages(null);
@@ -210,6 +311,9 @@ public class frmUtama extends javax.swing.JFrame {
             }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -347,6 +451,8 @@ public class frmUtama extends javax.swing.JFrame {
     private void MnTutupAplikasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnTutupAplikasiActionPerformed
         i = JOptionPane.showConfirmDialog(null, "Apakah aplikasi ini akan ditutup..??", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (i == JOptionPane.YES_OPTION) {
+            tutupVLC();
+            WindowPengaturan.dispose();
             System.exit(0);
         }
     }//GEN-LAST:event_MnTutupAplikasiActionPerformed
@@ -374,24 +480,67 @@ public class frmUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_MnBrowserEdgeActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        initVideo();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void BtnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCloseActionPerformed
+        WindowPengaturan.dispose();
+    }//GEN-LAST:event_BtnCloseActionPerformed
+
+    private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if (Sequel.mengedittf("antrian_informasi", "kode=?", "kalimat=?, lokasi_file_video=?", 3, new String[]{
+            " " + Tkalimat.getText(), TlokasiFile.getText(), "1"
+        }) == true) {
+            WindowPengaturan.dispose();
+            MnRefresKalimatActionPerformed(null);
+            JOptionPane.showMessageDialog(null,"Set pengaturan berhasil, jika memperbaiki lokasi file video tutup aplikasi lalu buka lagi..!");            
+        }
+    }//GEN-LAST:event_BtnSimpanActionPerformed
+
+    private void TkalimatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TkalimatKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_TAB) {
+            TlokasiFile.requestFocus();
+        }        
+    }//GEN-LAST:event_TkalimatKeyPressed
+
+    private void MnPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPengaturanActionPerformed
+        WindowPengaturan.setSize(762, 221);
+        WindowPengaturan.setLocationRelativeTo(internalFrame6);
+        WindowPengaturan.setVisible(true);
+        
+        Tkalimat.setText(Sequel.cariIsi("select kalimat from antrian_informasi where kode='1'"));
+        TlokasiFile.setText(Sequel.cariIsi("select lokasi_file_video from antrian_informasi where kode='1'"));
+    }//GEN-LAST:event_MnPengaturanActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.Button BtnClose;
+    private widget.Button BtnSimpan;
     private javax.swing.JMenuItem MnBrowserEdge;
+    private javax.swing.JMenuItem MnPengaturan;
     private javax.swing.JMenuItem MnRefresKalimat;
     private javax.swing.JMenuItem MnTutupAplikasi;
     private usu.widget.glass.PanelGlass PanelWall;
+    private widget.ScrollPane Scroll3;
+    public widget.TextArea Tkalimat;
+    private widget.TextBox TlokasiFile;
+    private javax.swing.JDialog WindowPengaturan;
     private widget.InternalFrame internalFrame13;
     private widget.InternalFrame internalFrame14;
     private widget.InternalFrame internalFrame15;
     private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame20;
     private widget.InternalFrame internalFrame4;
+    private widget.InternalFrame internalFrame5;
     private widget.InternalFrame internalFrame6;
     private widget.InternalFrame internalFrame7;
     private widget.InternalFrame internalFrame8;
+    private widget.Label jLabel38;
+    private widget.Label jLabel39;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JLabel judul;
     private javax.swing.JLabel kalimat_info;
@@ -572,35 +721,68 @@ public class frmUtama extends javax.swing.JFrame {
     }
 
     public void initVideo() {
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("win")) {
-            System.setProperty("jna.library.path", "C:\\Program Files\\VideoLAN\\VLC");
-        } else {
-            System.setProperty("jna.library.path", "/usr/lib/x86_64-linux-gnu");
-        }
-
-        new NativeDiscovery().discover();
-
-        final EmbeddedMediaPlayerComponent mediaPlayerComponent
-                = new EmbeddedMediaPlayerComponent();
-
-        internalFrame6.setLayout(new BorderLayout());
-        internalFrame6.add(mediaPlayerComponent, BorderLayout.CENTER);
-        internalFrame6.setVisible(true);
-
-        final String mediaPath = Sequel.cariIsi("select lokasi_file_video from antrian_informasi where kode='1'");
-
-        //Play pertama kali
-        mediaPlayerComponent.getMediaPlayer().playMedia(mediaPath);
-
-        //Loop manual saat selesai
-        mediaPlayerComponent.getMediaPlayer().addMediaPlayerEventListener(
-                new uk.co.caprica.vlcj.player.MediaPlayerEventAdapter() {
-            @Override
-            public void finished(uk.co.caprica.vlcj.player.MediaPlayer mediaPlayer) {
-                mediaPlayer.playMedia(mediaPath);
+        try {
+            String os = System.getProperty("os.name").toLowerCase();
+            if (os.contains("win")) {
+                System.setProperty("jna.library.path", "C:\\Program Files\\VideoLAN\\VLC");
+            } else {
+                System.setProperty("jna.library.path", "/usr/lib/x86_64-linux-gnu");
             }
+
+            new NativeDiscovery().discover();
+
+            //Ambil path video dari DB
+            String mediaPath = Sequel.cariIsi("select lokasi_file_video from antrian_informasi where kode='1'");
+
+            if (mediaPath == null || mediaPath.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null,"Path video kosong di database...!");
+                return;
+            }
+
+            File videoFile = new File(mediaPath);
+
+            if (!videoFile.exists()) {
+                JOptionPane.showMessageDialog(null,"File video tidak ditemukan/ada kesalahan dalam penulisan lokasi file/path :      \n" + mediaPath);
+                return;
+            }
+
+            //Inisialisasi player
+            final EmbeddedMediaPlayerComponent mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
+            internalFrame6.removeAll();
+            internalFrame6.setLayout(new BorderLayout());
+            internalFrame6.add(mediaPlayerComponent, BorderLayout.CENTER);
+            internalFrame6.revalidate();
+            internalFrame6.repaint();
+            internalFrame6.setVisible(true);
+            
+            //Play video pertama
+            mediaPlayerComponent.getMediaPlayer().playMedia(mediaPath);
+
+            //Loop manual jika selesai
+            mediaPlayerComponent.getMediaPlayer()
+                    .addMediaPlayerEventListener(
+                            new uk.co.caprica.vlcj.player.MediaPlayerEventAdapter() {
+                        @Override
+                        public void finished(
+                                uk.co.caprica.vlcj.player.MediaPlayer mediaPlayer) {
+                            mediaPlayer.playMedia(mediaPath);
+                        }
+                        @Override
+                        public void error(
+                                uk.co.caprica.vlcj.player.MediaPlayer mediaPlayer) {
+                            System.out.println("Terjadi kesalahan saat memutar video..!");
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat memutar video..!");
         }
-        );
+    }
+    
+    private void tutupVLC() {
+        if (mediaPlayerComponent != null) {
+            mediaPlayerComponent.release();
+        }
+        super.dispose();
     }
 }
